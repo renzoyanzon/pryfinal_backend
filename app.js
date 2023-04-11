@@ -1,5 +1,11 @@
 const express= require('express');
+const indexRouter = require('./src/routes/index')
 
 const app = express();
 
-app.use()
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+app.use('/api',indexRouter)
+
+module.exports= app
