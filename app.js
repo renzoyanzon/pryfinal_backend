@@ -10,6 +10,11 @@ app.use(express.urlencoded({extended:true}));
 mongooseConnect();
 
 
-app.use('/api',indexRouter)
+app.set('view engine','ejs');
+app.set('views','./views');
+
+
+
+app.use(indexRouter)
 
 module.exports= app

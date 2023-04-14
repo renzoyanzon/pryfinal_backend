@@ -1,5 +1,8 @@
 const router = require('express').Router();
 
+const pagesRouter = require('./pages/pages.routes')
+const productsRouter = require('./products/products.routes')
+
 router.get('/health',(_req,res)=>{
     res.status(200).json({
         success: true,
@@ -9,6 +12,9 @@ router.get('/health',(_req,res)=>{
         health: '!Up'
     })
 })
+
+.use(pagesRouter)
+.use('/api/products',productsRouter)
 
 
 module.exports = router;
