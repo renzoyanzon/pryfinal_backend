@@ -1,7 +1,36 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+const {getMongoConfig} = require('../../config/mongo.config');
 
-const mongooseConnect = async ()=>{
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/comercio';
+
+class MongooseConnect {
+    constructor(){
+        this.initConnection();
+    }
+
+    static getInstance (){
+        if(!this.instance){
+            this.instance= new MongooseConnect()
+        }
+        return this.instance
+    }
+
+    async initConnection(){
+        console.info("Initiating Mongo Connection");
+        try {
+            mongoose.set('strictQuery', false);
+            const response = await mongoose.connect(MONGO_URI,getMongoConfig());
+            if(response) console.info('Mongoose connected succesfully')
+        } catch (err) {
+            console.error(err)
+        }
+
+    }
+}
+
+
+/* const mongooseConnect = async ()=>{
     let MONGO_URI;
     const MONGO_USER = process.env.MONGO_USER;
     const MONGO_PASSWORD= process.env.MONGO_PASSWORD;
@@ -27,5 +56,5 @@ const mongooseConnect = async ()=>{
         throw new Error(err);
     }
 }
-
-module.exports = mongooseConnect;
+ */
+module.exports = MongooseConnect;

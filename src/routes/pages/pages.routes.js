@@ -1,9 +1,22 @@
 const router = require('express').Router();
+const authMiddleware = require('../../middlewares/auth.middleware');
+const PagesController = require('../../controllers/pages/pages.controller');
 
+class PagesRouter {
+    constructor(){
+        this.pagesController = new PagesController
+    }
 
-router.get('/',(_req,res)=>{
-    res.render('pages/home')
-});
+    start(){
+        router.get('/home', authMiddleware, this.pagesController.home);
+        router.get('/signin', this.pagesController.signIn);
+        router.get('/', this.pagesController.signIn);
+        router.get('/signup', this.pagesController.signUp);
+        router.get('/signout', this.pagesController.signOut);
+        router.get('/error', this.pagesController.error);
 
+        return router
+    }
+}
 
-module.exports= router;
+module.exports = PagesRouter;

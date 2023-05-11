@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
-const pagesRouter = require('./pages/pages.routes')
-const productsRouter = require('./products/products.routes')
+const PagesRouter = require('./pages/pages.routes')
+const ProductsRouter = require('./products/products.routes');
+
 
 router.get('/health',(_req,res)=>{
     res.status(200).json({
@@ -13,8 +14,14 @@ router.get('/health',(_req,res)=>{
     })
 })
 
-.use(pagesRouter)
-.use('/api/products',productsRouter)
+router.use(('/'),(new PagesRouter).start());
+router.use('/api/products',(new ProductsRouter).start());
+
+class Router {
+    constructor(){
+        return router
+    }
+}
 
 
-module.exports = router;
+module.exports = Router;

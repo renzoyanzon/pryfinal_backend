@@ -1,42 +1,24 @@
 const router= require('express').Router();
+const ProductsRestController = require('../../controllers/products/products.rest.controller');
 
-const ProductServices = require('../../services/products/products.services');
-const productServices = new ProductServices();
+class ProductsRouter {
 
+    constructor(){
+        this.productsRestController = ProductsRestController.getInstance();
+    }
 
-router.post('/products', async (_req,res)=>{
-    const data = await productServices.createProducts();
+    start (){
+        router.get('/',this.productsRestController.getAll);
+        router.get('/:id',this.productsRestController.getById);
+        router.post('/',this.productsRestController.create);
+        router.delete('/',this.productsRestController.deleteAll);
+        router.delete('/:id',this.productsRestController.deleteById);
 
-    res.status(200).json({
-        success: true,
-        data: data
-    })
-});
+        
 
-router.get('/products', async (_req,res)=>{
-    const data = await productServices.getAllProducts();
-    console.log(data)
-    res.status(200).json(data)
-});
+        return router
+    }
 
-router.get('/',async (_req,res)=>{
-    const products = await productServices.getAllProducts();
-    const data = products.data
-    res.render('pages/products',{data})
-})
+}
 
-
-
-router.get('/product:uuid', async (req,res)=>{
-    const {uuid} = req.params
-
-    const data = await productServices.getProduct(uuid);
-
-    res.status(200).json({
-        success: true,
-        data: data
-    })
-});
-
-
-module.exports = router
+module.exports = ProductsRouter

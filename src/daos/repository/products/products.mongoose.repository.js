@@ -1,4 +1,4 @@
-const productModel= require('../../services/mongo/product.model');
+const productModel= require('../../../services/mongo/product.model');
 
 class ProductServices {
     constructor(){}

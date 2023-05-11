@@ -1,20 +1,11 @@
 const express= require('express');
-const indexRouter = require('./src/routes/index')
-const mongooseConnect = require('./src/services/mongo/connect')
-
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+const indexLoader = require('./src/loaders/index.loader');
 
-mongooseConnect();
-
-
-app.set('view engine','ejs');
-app.set('views','./views');
-
-
-
-app.use(indexRouter)
+async function initLoaders(){
+    await indexLoader(app);
+}
+initLoaders();
 
 module.exports= app
