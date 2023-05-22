@@ -10,7 +10,7 @@ class ProductsRouter {
     start (){
         router.get('/',this.productsRestController.getAll);
         router.get('/:id',this.productsRestController.getById);
-        router.post('/',this.productsRestController.create);
+        router.post('/',this.productsRestController.append);
         router.delete('/',this.productsRestController.deleteAll);
         router.delete('/:id',this.productsRestController.deleteById);
 

@@ -64,9 +64,10 @@ class ProductsRestController {
         }
     }
 
-    create = async(req, res) =>{
+    append = async(req, res) =>{
         try {
-            const data = await this.productServices.create(req.body);
+            const data = await this.productServices.append(req.body);
+            
             if (!data) {
                 return res.status(500).json({
                     success: false,

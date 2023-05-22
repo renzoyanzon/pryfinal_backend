@@ -1,20 +1,23 @@
-const {ProductFactory} = require('../../daos/factory');
+const { ProductFactory } = require('../../daos/factory');
 
 const AppError = require('../../middlewares/error.middleware');
 
 class ProductServices{
     constructor(){
         this.productFactory = ProductFactory.getInstance();
+       
     }
 
     getAll = async()=>{
         try {
             
             const data = await this.productFactory.getAllProducts();
+            
             return data;
 
         } catch (err) {
-            throw new AppError(err.message, 'Data process', 'Products Services','getAll() error', 500 );
+            //throw new AppError(err.message, 'Data process', 'Products Services','getAll() error', 500 );
+            console.error(err)
         }
     }
 
@@ -23,16 +26,20 @@ class ProductServices{
             const data = await this.productFactory.getProductById('_id',_id);
             return data;
         } catch (err) {
-            throw new AppError(err.message, 'Data process', 'Products Services','getById(_id) error', 500 );
+            //throw new AppError(err.message, 'Data process', 'Products Services','getById(_id) error', 500 );
+            console.error(err)
         }
     }
 
-    create = async(productData)=>{
+    append = async(productData)=>{
         try {
-            const data = await this.productFactory.createProduct(productData);
+            
+            const data = await this.productFactory.append(productData);
             return data 
+
         } catch (err) {
-            throw new AppError(err.message, 'Data process', 'Products Services','create(productData) error', 500 );
+            //throw new AppError(err.message, 'Data process', 'Products Services','create(productData) error', 500 );
+            console.error(err)
         }
     }
 

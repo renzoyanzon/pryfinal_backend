@@ -18,7 +18,7 @@ class ProductsFsRepository{
     static getInstance(_nameFile){
         if (!this.instance){
             this.instance = new ProductsFsRepository(_nameFile);
-            console.log('File Repository for products Created');
+            console.info('File Repository for products Created');
         }
         
         return this.instance
@@ -57,7 +57,7 @@ class ProductsFsRepository{
         }
     }
 
-    async createProduct(data){
+    async append(data){
         try {
             const products = await this.getAllProducts();
             const id = products.length >=1 ? products[products.length -1].id +1 : 1;

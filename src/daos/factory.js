@@ -15,8 +15,10 @@ class UsersFactory{
 
 class ProductFactory{
     static getInstance (){
-        if(process.env.DATACORE == 'FS') return ProductsFsRepository.getInstance('Products');
-        return ProductsMongoRepository.getInstance();
+        if(process.env.DATACORE == 'MONGO_DB') {
+            return ProductsMongoRepository.getInstance();
+        } 
+         return ProductsFsRepository.getInstance('Products');
     }
 }
 

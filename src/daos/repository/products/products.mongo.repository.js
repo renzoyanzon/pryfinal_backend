@@ -27,8 +27,9 @@ class ProductsMongoRepository {
 
     }
 
-    async createProduct(data){
+    async append(data){
         try {
+            console.log(data)
             const product = new ProductModel(data);
             return await product.save();
             
