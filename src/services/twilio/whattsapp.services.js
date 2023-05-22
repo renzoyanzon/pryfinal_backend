@@ -18,7 +18,7 @@ async function sendWhatsapp (msg){
         console.info(message.sid)
 
     } catch (err) {
-        console.err(err);
+        console.error(err)
     }
     
 }

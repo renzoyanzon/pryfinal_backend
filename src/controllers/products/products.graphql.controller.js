@@ -1,9 +1,9 @@
-const { ProductsFactory } = require('../../daos/factory');
+const ProductServices = require('../../services/product/product.services')
 const httpStatus = require('http-status')
 
 class ProductsGraphQlController{
     constructor(){
-        this.productFactory = ProductsFactory.getInstance();
+        this.productFactory = new ProductServices();
     }
 
     static getInstance(){

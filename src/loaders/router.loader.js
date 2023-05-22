@@ -1,8 +1,9 @@
 const Router = require('../routes/index');
-const router= new Router();
+
 
 const routerLoader = async (app)=>{
-    app.use('/',router);
+    const router = Router.getInstance();
+    app.use('/', router);
     
     return app;
 }

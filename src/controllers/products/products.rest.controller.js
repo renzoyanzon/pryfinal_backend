@@ -1,9 +1,9 @@
-const {ProductsFactory} = require('../../daos/factory');
+const ProductServices = require('../../services/product/product.services')
 const httpStatus = require('http-status')
 
 class ProductsRestController {
     constructor(){
-        this.productFactory = ProductsFactory.getInstance();
+        this.productServices = new ProductServices();
     }
 
     static getInstance (){
@@ -15,7 +15,7 @@ class ProductsRestController {
 
     getAll = async(_req, res) =>{
         try {
-            const data = await this.productFactory.getAllProducts();
+            const data = await this.productServices.getAll();
             
             if (!data) {
                 return res.status(500).json({
@@ -41,7 +41,7 @@ class ProductsRestController {
     getById = async (req,res)=>{
         try {
             const id = req.params.id;
-            const data = await this.productFactory.getProductById(id);
+            const data = await this.productServices.getById(id);
             if(!data){
                 return res.status(500).json({
                     success:false,
@@ -66,7 +66,7 @@ class ProductsRestController {
 
     create = async(req, res) =>{
         try {
-            const data = await this.productFactory.createProduct(req.body);
+            const data = await this.productServices.create(req.body);
             if (!data) {
                 return res.status(500).json({
                     success: false,

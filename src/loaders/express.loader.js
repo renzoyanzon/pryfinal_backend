@@ -14,6 +14,7 @@ const expressLoader = async (app)=>{
 
     app.set('view engine','ejs');
     app.set('views','./views/pages');
+    app.use('/uploads', express.static('public/images'));
 
     return app;
 }

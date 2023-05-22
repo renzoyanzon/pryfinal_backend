@@ -10,7 +10,7 @@
 <body class="d-flex flex-column justify-content-center align-items-center p-5">
     <h1>Signin</h1>
     
-    <form action="/signin" method="POST" class="w-50">
+    <form action="/api/auth/signin" method="POST" class="w-50">
         <div class="form-group">
           <label for="username">Ingrese su email</label>
           <input type="text" class="form-control" id="email" name="username" aria-describedby="userHelp" placeholder="Enter username">
@@ -21,7 +21,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <div>
-          <a href="/signup"> Registrarse</a>
+          <a href="signup"> Registrarse</a>
         </div>
     </form>
     

@@ -1,7 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const UserModel = require('../mongo/user.model');
+const UserModel = require('../../daos/models/user.model');
 const md5 =require('md5');
 
 const sendEmail = require('../nodeMailer/nodeMailer.services');

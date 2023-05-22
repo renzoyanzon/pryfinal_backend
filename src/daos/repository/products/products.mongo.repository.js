@@ -1,5 +1,8 @@
-const ProductModel = require('../../../services/mongo/product.model');
-const MongooseConnect = require('../../../services/mongo/connect');
+const ProductModel = require('../../models/product.model');
+const MongooseConnect = require('../../../utils/mongo/connect');
+const ProductDto = require('../../dto/products.dto');
+
+const AppError = require('../../../middlewares/error.middleware')
 
 class ProductsMongoRepository {
     constructor(){
@@ -14,16 +17,36 @@ class ProductsMongoRepository {
     }
 
     async getAllProducts(){
-        return await ProductModel.find({})
+        try {
+            const query = await ProductModel.find({});
+            return query;
+        } catch (err) {
+            throw new AppError(err.message, 'Mongo data process','Products Repository', 'getAllProducts() error', 500);
+            
+        }
+
     }
 
     async createProduct(data){
-        const product = new ProductModel(data);
-        return await product.save();
+        try {
+            const product = new ProductModel(data);
+            return await product.save();
+            
+        } catch (err) {
+            throw new AppError(err.message, 'Mongo data process','Products Repository', 'createProduct() error', 500);
+        }
+        
     }
 
-    async getProductById (id){
-        return await ProductModel.find({uuid:id})
+    async getProductById (fieldName= '_id', fieldValue){
+        try {
+            const query= await ProductModel.findOne({[fieldName]:fieldValue});
+            const productDto = await new ProductDto(query);
+            return productDto;
+            
+        } catch (err) {
+            throw new AppError(err.message, 'Mongo data process','Products Repository', 'getProductById() error', 500);
+        }
     }
 
 }

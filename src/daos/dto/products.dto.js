@@ -3,7 +3,6 @@ class ProductDto{
         this.name = data.name,
         this.description = data.description,
         this.price = data.price,
-        this.code = data.code,
         this.thumbnail = data.thumbnail,
         this.stock = data.stock
     }

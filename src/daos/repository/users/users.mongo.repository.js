@@ -1,7 +1,7 @@
-const UserModel = require('../../../services/mongo/user.model');
-const MongooseConnect = require('../../../services/mongo/connect');
+const UserModel = require('../../models/user.model');
+const MongooseConnect = require('../../../utils/mongo/connect');
 
-const UserDTO = require('../../../dto/user.dto');
+const UserDTO = require('../../dto/user.dto');
 
 class UsersMongoRepository{
     constructor() {

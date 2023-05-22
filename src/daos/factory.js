@@ -7,13 +7,13 @@ const UsersMongoRepository = require('./repository/users/users.mongo.repository'
 
 class UsersFactory{
     static getInstance(){
-        if(process.env.DATA_STORAGE == 'FILE') return UsersMemRepository.getInstance('Users');
+        if(process.env.DATA_STORAGE == 'FILE') return UserFsRepository.getInstance('Users');
         return UsersMongoRepository.getInstance();
     }
 }
 
 
-class ProductsFactory{
+class ProductFactory{
     static getInstance (){
         if(process.env.DATACORE == 'FS') return ProductsFsRepository.getInstance('Products');
         return ProductsMongoRepository.getInstance();
@@ -21,4 +21,4 @@ class ProductsFactory{
 }
 
 
-module.exports= {ProductsFactory,UsersFactory};
+module.exports= {ProductFactory,UsersFactory};

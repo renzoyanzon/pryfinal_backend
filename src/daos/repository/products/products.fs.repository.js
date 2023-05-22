@@ -15,9 +15,9 @@ class ProductsFsRepository{
         }
     }
 
-    static getInstance(){
+    static getInstance(_nameFile){
         if (!this.instance){
-            this.instance = new ProductsFsRepository();
+            this.instance = new ProductsFsRepository(_nameFile);
             console.log('File Repository for products Created');
         }
         
