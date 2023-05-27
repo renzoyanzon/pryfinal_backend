@@ -6,14 +6,14 @@ router.post('/signup',
     passport.authenticate('signup',{failureRedirect:'/error'}) ,
     async (req,res)=>{
     console.log("info",`El usuario ${req.user.fullname} se ha registrado correctamente`);
-    res.redirect('/home');
+    res.redirect('/');
 });
 
 router.post('/signin',
     passport.authenticate('login',{failureRedirect:'/error'}) ,
     async (req,res)=>{
         console.log("info",`El usuario ${req.user.fullname} ha ingresado session`);
-        res.redirect('/home');
+        res.redirect('/');
 })
 
 router.get('/signout',(req,res)=>{

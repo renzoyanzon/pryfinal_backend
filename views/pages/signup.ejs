@@ -8,6 +8,10 @@
     <title>Signup</title>
 </head>
 <body class="d-flex flex-column justify-content-center align-items-center p-5">
+
+    <header>
+      <%- include('../partials/navbar'); %>
+    </header>
     <h1> Favor de registrarse si no tiene una cuenta activa </h1>
  
     <form action="/api/auth/signup" method="POST" class="w-50">
@@ -39,9 +43,7 @@
             <small id="userHelp" class="form-text text-muted">Not mandatory</small>
         <div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <div>
-          <a href="/signin"> Iniciar session</a>
-        </div>
+    
       </form>
 
 </body>

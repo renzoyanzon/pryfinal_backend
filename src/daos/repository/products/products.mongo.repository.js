@@ -12,12 +12,14 @@ class ProductsMongoRepository {
     static getInstance(){
         if(!this.instance){
             this.instance = new ProductsMongoRepository();
-            console.info('Local Mongo Repository for products created')
+            console.info('Local Mongo Repository for products created');
         }
+        return this.instance
     }
 
     async getAllProducts(){
         try {
+           
             const query = await ProductModel.find({});
             return query;
         } catch (err) {
@@ -29,7 +31,7 @@ class ProductsMongoRepository {
 
     async append(data){
         try {
-            console.log(data)
+            
             const product = new ProductModel(data);
             return await product.save();
             

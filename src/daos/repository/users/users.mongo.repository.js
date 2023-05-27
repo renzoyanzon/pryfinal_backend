@@ -1,7 +1,6 @@
 const UserModel = require('../../models/user.model');
 const MongooseConnect = require('../../../utils/mongo/connect');
 
-const UserDTO = require('../../dto/user.dto');
 
 class UsersMongoRepository{
     constructor() {
@@ -16,21 +15,44 @@ class UsersMongoRepository{
         return this.instance
     }
 
-    async save(data){
-        const userStage = new UserModel(data);
-        return await userStage.save();
+    async getAll (){
+        try {
+            const query = await UserModel.find({});
+            return query
+            
+        } catch (err) {
+            console.error(err.message)
+        }
     }
 
-    async getUserByUserName(username){
-        const query = await UserModel.findOne({ username });
-        const userDTO = await new UserDTO(query);
-        return userDTO;
+    async append(data){
+
+        try {
+            const userStage = new UserModel(data);
+            return await userStage.save();
+        } catch (err) {
+            console.error(err.message)
+        }
+        
     }
 
-    async getUserById( _id ){
-        const query = await UserModel.findOne({ _id });
-        const userDTO = await new UserDTO(query);
-        return userDTO;
+    async getByCondition( fieldName = '_id' , fieldValue ){
+        try {
+            const query = await UserModel.findOne({ [fieldName]: fieldValue});
+            return query
+            
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    async getPassByUserName(username){
+        try {
+            const query = await UserModel.findOne({username});
+            return query.password
+        } catch (err) {
+            console.error(err.message)
+        }
     }
 }
 

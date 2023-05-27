@@ -1,9 +1,9 @@
 const { createSchema } = require('graphql-yoga');
 const ProductsGraphQlController = require('../../controllers/products/products.graphql.controller');
-const { UsersFactory } = require('../../daos/factory');
+const { UserFactory } = require('../../daos/factory');
 
 const productGraphQlController = ProductsGraphQlController.getInstance();
-const userFactory = UsersFactory.getInstance();
+const userFactory = UserFactory.getInstance();
 
 const schema = createSchema({
     typeDefs: /* GraphQL */ `

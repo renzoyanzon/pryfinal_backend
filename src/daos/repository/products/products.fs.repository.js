@@ -75,7 +75,6 @@ class ProductsFsRepository{
         try {
             const products = await this.getAllProducts();
             const newProducts = products.filter(el=> el.id !== id);
-            console.log(newProducts)
             await fs.promises.writeFile(this.ruta, JSON.stringify(newProducts) );
             return({
                 success:true,
@@ -99,7 +98,7 @@ class ProductsFsRepository{
 
     async updateProduct (uuid,data){
         try {
-            console.log(data)
+           
             const products = await fs.promises.readFile(this.ruta);
             const productsObject= JSON.parse(products);
             const newProducts = productsObject.map(el=>(el.uuid == uuid) ? data : el);

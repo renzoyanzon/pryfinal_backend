@@ -16,8 +16,8 @@ class ProductServices{
             return data;
 
         } catch (err) {
-            //throw new AppError(err.message, 'Data process', 'Products Services','getAll() error', 500 );
-            console.error(err)
+            throw new AppError(err.message, 'Data process', 'Products Services','getAll() error', 500 );
+          
         }
     }
 
@@ -26,8 +26,8 @@ class ProductServices{
             const data = await this.productFactory.getProductById('_id',_id);
             return data;
         } catch (err) {
-            //throw new AppError(err.message, 'Data process', 'Products Services','getById(_id) error', 500 );
-            console.error(err)
+            throw new AppError(err.message, 'Data process', 'Products Services','getById(_id) error', 500 );
+           
         }
     }
 
@@ -38,8 +38,8 @@ class ProductServices{
             return data 
 
         } catch (err) {
-            //throw new AppError(err.message, 'Data process', 'Products Services','create(productData) error', 500 );
-            console.error(err)
+            throw new AppError(err.message, 'Data process', 'Products Services','create(productData) error', 500 );
+           
         }
     }
 
