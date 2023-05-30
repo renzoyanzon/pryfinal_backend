@@ -6,6 +6,8 @@ const ProductsMongoRepository = require('./repository/products/products.mongo.re
 const UsersMongoRepository = require('./repository/users/users.mongo.repository');
 const UsersFsRepository = require('./repository/users/users.fs.repository');
 
+const CartMongoRepository =  require('./repository/cart/cart.mongo.repository');
+const CartFsRepository = require('./repository/cart/cart.fs.repository');
 
 class UserFactory{
     static getInstance(){
@@ -23,5 +25,12 @@ class ProductFactory{
     }
 }
 
+class CartFactory{
+    static getInstance(){
+        if(process.env.DATACORE ==='MONGO_DB') return CartMongoRepository.getInstance();
+        return CartFsRepository.getInstance('Cart');
+    }
+}
 
-module.exports= {ProductFactory,UserFactory};
+
+module.exports= {ProductFactory,UserFactory, CartFactory};

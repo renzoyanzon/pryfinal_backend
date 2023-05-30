@@ -4,6 +4,9 @@ const userServices= new UserServices();
 const ProductServices= require('../../services/product/product.services');
 const productServices= new ProductServices();
 
+const CartServices = require('../../services/cart/cart.services');
+const cartSertices = new CartServices();
+
 const createMessage = require('../../utils/pages/pages.utils');
 
 class PagesController {
@@ -50,6 +53,15 @@ class PagesController {
         req.logout(()=>{
             res.redirect('/signin')
         })
+    }
+
+    cart = async(req,res)=>{
+        try {
+            const userId = req.session.passport.user;
+            const cart= await cartSertices.getLastCart(userId)
+        } catch (error) {
+            
+        }
     }
 
 

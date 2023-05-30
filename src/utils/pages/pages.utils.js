@@ -1,4 +1,4 @@
-const createMessage = (page, req, {user=null, products=null, err=null}={})=>{
+const createMessage = (page, req, {user=null, products=null, cart=null,err=null}={})=>{
     const navBar = [{title: "Home", link:'/'}];
     const authenticated =  req.isAuthenticated();
     const fullname = user? user.fullname : null;
@@ -9,6 +9,7 @@ const createMessage = (page, req, {user=null, products=null, err=null}={})=>{
     };
 
     if (products !== null) main.products = products;
+    if(cart !==null) main.cart = cart;
     
     if(page === 'signIn'){
         navBar.push({title: "Register", link: "/signup"});
@@ -20,7 +21,8 @@ const createMessage = (page, req, {user=null, products=null, err=null}={})=>{
 
    if(page ==='home'){
         navBar.push({title: 'Logout', link:'/api/auth/signout'});
-        navBar.push({title: 'Products', link:'/products'})
+        navBar.push({title: 'Products', link:'/products'});
+        navBar.push({title: "Cart",link: "/cart"})
    }
 
 

@@ -1,36 +1,17 @@
 const router= require('express').Router();
-const _ = require('lodash');
-const {v4: uuidv4} = require('uuid');
+const CartController = require('../../controllers/cart/cart.controller');
 
-const {getCartRepository} = require('../../daos/index');
-const CartService = getCartRepository();
-const cartService = new CartService();
-
-router.post('/', async (req,res)=>{
-    try {
-        const {body} =req;
-    
-        if(_.isNil(body)) res.status(400).json({success:false, message: "ERROR (body missing)"});
-    
-        const data = await cartService.createCarts(body);
-        if(!data.success) res.status(500).json(data)
-        res.status(200).json(data);
-    } catch (error) {
-        console.error(error)
+class CartRouter {
+    constructor(){
+        this.cartController = CartController.getInstance();
     }
 
-});
-
-router.get('/', async(_req,res)=>{
-    try {
-        const data = await productService.getAllCarts();
-        if(!data.success) res.status(500).json(data)
-        res.render('pages/carts', data)
-    } catch (error) {
-        console.error(error)
+    start(){
+        router.get('/', this.cartController.getAll);
+        router.post('/:productId', this.cartController.addProduct);
+        router.post('/butCart/:cartId', this.cartController.buyCart);
+        return router
     }
-})
+}
 
-
-
-module.exports= router;
+module.exports = CartRouter;

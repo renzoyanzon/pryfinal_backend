@@ -1,20 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+     <%- include('../partials/head'); %>
 </head>
-<body>
-    <div class="card" style="width: 18rem;">
-        <img  src="<%= el.thumbnail %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= el.name %></h5>
-          <p class="card-text"><%= el.description %></p>
-          <p class="card-text"><%= el.price %> $</p>
-          <a href="#" class="btn btn-primary">add</a>
-        </div>
-    </div>
+
+<body class="d-flex flex-column justify-content-center align-items-center p-5">
+
+  <div class="container text-center">
+    <%- include('../partials/navbar'); %>
+  </div>
+
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <h1 class="text-capitalize">Product Cart</h1>
+    <% if (typeof message.main.cart == 'object') { %>
+      <p>Cart id: <%= message.main.cart._id %></p>
+    <%} else { %>
+      <h3>Cart empty</h3>
+    <% } %>
+  </div> 
+  <div class="p-5 w-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="row w-75">
+      <% if (typeof message.main.cart == 'object' && typeof message.main.cart.products == 'object') { %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+            <% message.main.cart.products.forEach(function(item, index) { %>
+              <tr>
+                <th scope="row"><%= index %></th>
+                <td><%= item.name %></td>
+                <td><%= item.description %></td>
+                <td><%= item.price %></td>
+                <th> <button class="fa fa-trash" aria-hidden="true"></button></th>
+              </tr>
+            <% }); %>
+          
+        </tbody>
+      </table>
+      <form action= <%=`/api/cart/buyCart/${message.main.cart._id}` %> method="POST" class="w-50"> 
+        <button type="submit" class="btn btn-primary">Buy Cart</button>
+      </form>
+      <% }; %>
+      </div>
+  </div>
+  
+ 
 </body>
 </html>

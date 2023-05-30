@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const PagesRouter = require('./pages/pages.routes')
 const ProductsRouter = require('./products/products.routes');
+const CartRouter = require('./cart/cart.routes')
 const sessionRouter = require('./session/session.routes')
 
 class Router {
@@ -25,6 +26,7 @@ class Router {
 
         //API Routers
         router.use('/api/products',(new ProductsRouter).start());
+        router.use('/api/cart', (new CartRouter).start())
 
         return router
     }
