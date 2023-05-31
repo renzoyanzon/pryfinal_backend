@@ -3,6 +3,7 @@ const MongooseConnect = require('../../../utils/mongo/connect');
 const CartDto = require('../../dto/cart.dto');
 
 const AppError = require('../../../middlewares/error.middleware');
+const {logger}= require('../../../utils/logger/index.logger')
 
 class CartMongoRepository{
     constructor(){
@@ -12,7 +13,7 @@ class CartMongoRepository{
     static getInstance(){
         if(!this.instance){
             this.instance =  new CartMongoRepository();
-            console.info('Carts Repository: Local Mongo instance created')
+            logger.info('Carts Repository: Local Mongo instance created')
         }
         return this.instance
     }

@@ -3,6 +3,8 @@ const {UserFactory} = require('../../daos/factory');
 const EncryptServices = require('../../utils/encrypt/encrypt.services');
 const encryptServices = new EncryptServices();
 
+const AppError = require('../../middlewares/error.middleware');
+
 class UserServices {
     constructor(){
         this.userFactory = UserFactory.getInstance();
@@ -15,7 +17,7 @@ class UserServices {
             return data
 
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','getAll error', 500 );
         }
     }
 
@@ -26,7 +28,7 @@ class UserServices {
             return data
 
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','getById error', 500 );
         }
     }
 
@@ -37,7 +39,7 @@ class UserServices {
         return data
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','getByUserName error', 500 );
         }
     }
 
@@ -51,7 +53,7 @@ class UserServices {
             return true
 
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','passwordCheck error', 500 );
         }  
     }
 
@@ -65,7 +67,7 @@ class UserServices {
             return(data)
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','append error', 500 );
         }  
     }
 
@@ -75,7 +77,7 @@ class UserServices {
 
             return data
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'Data process', 'Users Services','deleteById error', 500 );
         }
          
     }

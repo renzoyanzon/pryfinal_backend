@@ -1,4 +1,5 @@
 const httpStatus = require  ('http-status');
+const {logger}= require('../utils/logger/index.logger')
 
 
 class AppError extends Error{
@@ -14,7 +15,7 @@ class AppError extends Error{
             statuCode : `${httpStatus[statusCode]}`,
             timestamp: new Date().toDateString()
         })
-        console.error(this.message)
+        logger.error(this.message)
     }
 }
 

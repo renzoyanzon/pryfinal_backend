@@ -1,5 +1,7 @@
 const ProductServices = require('../../services/product/product.services')
-const httpStatus = require('http-status')
+const httpStatus = require('http-status');
+
+const {logger} = require('../../utils/logger/index.logger')
 
 class ProductsGraphQlController{
     constructor(){
@@ -55,7 +57,7 @@ class ProductsGraphQlController{
                 message: `Product ${data} eliminated`
             });
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -77,7 +79,7 @@ class ProductsGraphQlController{
                 message: `All products eliminated`
             });
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err

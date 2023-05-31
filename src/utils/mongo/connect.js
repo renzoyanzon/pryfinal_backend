@@ -23,7 +23,7 @@ class MongooseConnect {
         try {
             mongoose.set('strictQuery', false);
             const response = await mongoose.connect(MONGO_URI,getMongoConfig());
-            if(response) console.info('Mongoose connected succesfully')
+            if(response) logger.info('Mongoose connected succesfully')
         } catch (err) {
             logger.error(err)
         }

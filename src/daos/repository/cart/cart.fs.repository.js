@@ -3,6 +3,7 @@ const {v4:uuidv4} =require ('uuid');
 const {logger} = require('../../../utils/logger/index.logger')
 
 const CartDto = require('../../dto/cart.dto');
+const AppError = require('../../../middlewares/error.middleware');
 
 class CartFsRepository {
     constructor(_fileName){
@@ -37,7 +38,7 @@ class CartFsRepository {
             return data
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','getAll() error', 500 );
             
         }
     }
@@ -54,7 +55,7 @@ class CartFsRepository {
             return data
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','append() error', 500 );
         }
     }
 
@@ -73,7 +74,7 @@ class CartFsRepository {
 
             return true
         }  catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','update(cartData) error', 500 );
         }
     }
 
@@ -87,7 +88,7 @@ class CartFsRepository {
             return query[ query.length - 1];
 
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','getLastCart(userId) error', 500 );
         }
     }
 
@@ -101,7 +102,7 @@ class CartFsRepository {
             const cartDto = new CartDto(query);
             return cartDto
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','getByCondition(fieldName, fieldValue) error', 500 );
         }
     }
 
@@ -118,7 +119,7 @@ class CartFsRepository {
             return true
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','deleteByCondition(fieldName, fieldValue) error', 500 );
         }
        
     }
@@ -129,7 +130,7 @@ class CartFsRepository {
             return true
             
         } catch (err) {
-            console.error(err.message)
+            throw new AppError(err.message, 'File data process', 'Carts Repository','deleteAll error', 500 );
         }
     }
 

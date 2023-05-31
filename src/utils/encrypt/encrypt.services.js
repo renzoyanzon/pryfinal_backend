@@ -1,5 +1,7 @@
 const argon2= require('argon2');
 
+const {logger}= require('../logger/index.logger')
+
 class EncryptServices{
     constructor(){}
 
@@ -9,7 +11,7 @@ class EncryptServices{
             return hash
             
         } catch (err) {
-            console.error('Error al generar el hash', err)
+            logger.error('Error al generar el hash', err)
         }
     }
 
@@ -18,7 +20,7 @@ class EncryptServices{
             const match = await argon2.verify(hash,password);
             return match
         } catch (err) {
-            console.error('Error al verificar la contraseña', err)
+            logger.error('Error al verificar la contraseña', err)
         }
 
     }

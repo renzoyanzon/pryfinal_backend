@@ -6,6 +6,8 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(accountSid, authToken);
 
+const{logger}= require('../../utils/logger/index.logger')
+
 async function sendWhatsapp (msg){
     try {
         const message = await client.messages
@@ -15,10 +17,10 @@ async function sendWhatsapp (msg){
             to: '+542617085942'
         })
 
-        console.info(message.sid)
+        logger.info(message.sid)
 
     } catch (err) {
-        console.error(err)
+        logger.error(err)
     }
     
 }

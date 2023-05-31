@@ -8,6 +8,8 @@ const productServices = new ProductServices();
 
 const httpStatus = require('http-status');
 
+const {logger} = require('../../utils/logger/index.logger')
+
 class CartController{
     constructor(){
         this.cartServices = new CartServices();
@@ -35,7 +37,7 @@ class CartController{
                 message: data
             });
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -61,7 +63,7 @@ class CartController{
             }
             return cartId
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -85,7 +87,7 @@ class CartController{
             this.cart(req,res)
             
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -107,7 +109,7 @@ class CartController{
             this.cart(req,res);
             
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -131,7 +133,7 @@ class CartController{
             });
             
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -152,7 +154,7 @@ class CartController{
             }
             this.cart(req, res);
         } catch (err) {
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err

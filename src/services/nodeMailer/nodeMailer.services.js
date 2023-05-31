@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config()
+require('dotenv').config();
+
+const {logger}= require('../../utils/logger/index.logger')
 
 const sendEmail = async (msg) => {
 
@@ -25,9 +27,9 @@ const sendEmail = async (msg) => {
         }
 
         const result = await transporter.sendMail(emailOptions);
-        console.info(result)
+        logger.info(result)
     } catch (err) {
-        console.err(err);
+        logger.error(err);
     }
 }
 

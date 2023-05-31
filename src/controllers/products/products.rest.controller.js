@@ -1,5 +1,7 @@
-const ProductServices = require('../../services/product/product.services')
-const httpStatus = require('http-status')
+const ProductServices = require('../../services/product/product.services');
+
+const httpStatus = require('http-status');
+const {logger} = require('../../utils/logger/index.logger');
 
 class ProductsRestController {
     constructor(){
@@ -30,7 +32,7 @@ class ProductsRestController {
             });
 
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -56,7 +58,7 @@ class ProductsRestController {
 
             
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -79,7 +81,7 @@ class ProductsRestController {
                 message: `Product ${data} created`
             });
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -97,7 +99,7 @@ class ProductsRestController {
             })
             
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
@@ -120,7 +122,7 @@ class ProductsRestController {
                 message: `Product ${id} eliminated`
             })
         } catch(err){
-            console.error(err);
+            logger.error(err);
             res.send({
                 success: false,
                 message: err
