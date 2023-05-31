@@ -72,7 +72,6 @@ class CartController{
     addProduct = async(req,res)=>{
         try {
             const {productId}= req.params;
-            console.log(productId)
             const userId = req.session.passport.user;
             const productToappend = await productServices.getById(productId);
             const data = await this.cartServices.append(userId, productToappend);

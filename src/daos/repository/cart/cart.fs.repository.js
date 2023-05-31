@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {v4:uuidv4} =require ('uuid');
+const {logger} = require('../../../utils/logger/index.logger')
 
 const CartDto = require('../../dto/cart.dto');
 
@@ -12,7 +13,7 @@ class CartFsRepository {
     static getInstance (_fileName){
         if(!this.instance){
             this.instance = new CartFsRepository(_fileName);
-            console.info(`Cart Repository: File ${this.instance.ruta} used`)
+            logger.info(`Cart Repository: File ${this.instance.ruta} used`)
         }
         return this.instance
     }
@@ -21,7 +22,7 @@ class CartFsRepository {
         try{
             await fs.promises.writeFile(this.ruta, "");
         } catch (err) {
-            console.log("Cart Repository: Error creating file", err.message);
+            logger.info ("Cart Repository: Error creating file", err.message);
         }
     }
 

@@ -11,7 +11,7 @@ class ProductServices{
     getAll = async()=>{
         try {
             
-            const data = await this.productFactory.getAllProducts();
+            const data = await this.productFactory.getAll();
             
             return data;
 
@@ -23,7 +23,7 @@ class ProductServices{
 
     getById = async(_id)=>{
         try {
-            const data = await this.productFactory.getProductById('_id',_id);
+            const data = await this.productFactory.getByCondition('_id',_id);
             return data;
         } catch (err) {
             throw new AppError(err.message, 'Data process', 'Products Services','getById(_id) error', 500 );

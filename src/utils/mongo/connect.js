@@ -4,6 +4,8 @@ const {getMongoConfig} = require('../../config/mongo.config');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/comercio';
 
+const {logger} = require('../logger/index.logger');
+
 class MongooseConnect {
     constructor(){
         this.initConnection();
@@ -17,13 +19,13 @@ class MongooseConnect {
     }
 
     async initConnection(){
-        console.info("Initiating Mongo Connection");
+        logger.info("Initiating Mongo Connection");
         try {
             mongoose.set('strictQuery', false);
             const response = await mongoose.connect(MONGO_URI,getMongoConfig());
             if(response) console.info('Mongoose connected succesfully')
         } catch (err) {
-            console.error(err)
+            logger.error(err)
         }
 
     }

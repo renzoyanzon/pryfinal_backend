@@ -33,6 +33,9 @@
     "nodemailer": "^6.9.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "pino": "^8.14.1",
+    "pino-http": "^8.3.3",
+    "pino-pretty": "^10.0.0",
     "session": "^0.1.0",
     "twilio": "^4.11.0",
     "uuid": "^9.0.0"

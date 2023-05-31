@@ -1,6 +1,9 @@
 const fs = require('fs');
 const {v4:uuidv4} =require ('uuid');
 
+const AppError= require('../../../middlewares/error.middleware');
+const {logger}= require('../../../utils/logger/index.logger')
+
 class UsersFsRepository{
     constructor(_nameFile){
         this.ruta = `./${_nameFile}.txt`;
@@ -12,14 +15,14 @@ class UsersFsRepository{
         try {
             await fs.promises.writeFile(this.ruta)  
         } catch (err) {
-            console.log("Error al crear archivo", err.message);
+            logger.error("Error al crear archivo", err.message);
         }
     }
 
     static getInstance(_nameFile){
         if (!this.instance){
             this.instance = new UsersFsRepository(_nameFile);
-            console.log('File Repository for users Created');
+            logger.info('File Repository for users Created');
         }
         
         return this.instance
@@ -35,7 +38,7 @@ class UsersFsRepository{
         const data = JSON.parse(users);
         return data
         } catch (err) {
-            console.log("Error al crear archivo", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','getAll() error', 500 );
         }
     }
 
@@ -52,7 +55,7 @@ class UsersFsRepository{
             return newUser
             
         } catch (err) {
-            console.log("Error al crear el usuario", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','append(userData) error', 500 );
         }
     }
 
@@ -67,7 +70,7 @@ class UsersFsRepository{
             return query
 
         } catch (err) {
-            console.log("Error al obtener el ususario", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','getByCondition(fieldName, fieldValue) error', 500 );
         }
     }
 
@@ -82,7 +85,7 @@ class UsersFsRepository{
             return query.password
 
         } catch (err) {
-            console.log("Error al obtener el password del usuario", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','getPasswordByUserName(username) error', 500 );
         }
     }
 
@@ -99,7 +102,7 @@ class UsersFsRepository{
             return data;
             
         } catch (err) {
-            console.log("Error al borrar el usuario", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','deleteByCondition(fieldName, fieldValue) error', 500 );
         }
     }
 
@@ -109,7 +112,7 @@ class UsersFsRepository{
             return true
             
         } catch (err) {
-            console.log("Error al borrar todos los usuarios", err.message);
+            throw new AppError(err.message, 'File data process', 'Users Repository','deleteAll error', 500 );
         }
     }
 }

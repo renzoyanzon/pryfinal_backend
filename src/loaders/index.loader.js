@@ -2,16 +2,21 @@ const expressLoader = require('./express.loader');
 const routerLoader= require('./router.loader');
 const sessionLoader = require('./session.loader');
 const graphqlLoader = require('./graphql.loader');
+const loggerLoader = require('./logger.loader');
+
+const {logger} = require('../utils/logger/index.logger')
 
 const indexLoader = async (app)=>{
+    loggerLoader( app );
+    logger.info('Loaders: Loggers Initialized');
     await expressLoader (app);
-    console.info('Loaders: Express Initialized');
+    logger.info('Loaders: Express Initialized');
     await sessionLoader (app);
-    console.info('Loaders: Session Initialized')
+    logger.info('Loaders: Session Initialized')
     await routerLoader(app);
-    console.info('Loaders: Router Initialized');
+    logger.info('Loaders: Router Initialized');
     await graphqlLoader( app );
-    console.info('Loaders: GraphQL Initialized');
+    logger.info('Loaders: GraphQL Initialized');
 };
 
 module.exports = indexLoader;
