@@ -19,10 +19,11 @@ const createMessage = (page, req, {user=null, products=null, cart=null,err=null}
         navBar.push({title: 'Signin', link:'/signin'});
     }
 
-   if(page ==='home'){
-        navBar.push({title: 'Logout', link:'/api/auth/signout'});
+   if(page ==='home' || page==='cart'){
+        
         navBar.push({title: 'Products', link:'/products'});
-        navBar.push({title: "Cart",link: "/cart"})
+        navBar.push({title: "Cart",link: "/cart"});
+        navBar.push({title: 'Logout', link:'/api/auth/signout'});
    }
 
 

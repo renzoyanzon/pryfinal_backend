@@ -164,18 +164,16 @@ class CartController{
 
     deleteById = async(req, res) =>{
         try {
-            const id = req.params.id;
-            const data = await this.cartServices.deleteById(id);
+            const {cartId} = req.params
+            const data = await this.cartServices.deleteById(cartId);
             if (!data) {
                 return res.status(500).json({
                     success: false,
                     message: `${httpStatus[500]}`
                 })
             }
-            res.status(200).json({
-                success: true,
-                message: `Product ${data} deleted from cart`
-            });
+            this.cart(req,res)
+
         } catch(err){
             logger.error(err);
             res.send({
@@ -207,11 +205,31 @@ class CartController{
         }
     }
 
+    deleteProductById = async(req,res)=>{
 
+        try {
+            const userId = req.session.passport.user;
+            const productId = req.query.productId;
+            const cartId = req.query.cartId;
 
+            console.log(productId);
+            console.log(cartId)
+         
+            const data = await this.cartServices.deleteProductById(cartId, userId,productId);
+            if(!data){
+                return res.status(500).json({
+                    success: false,
+                    message: `${httpStatus[500]}`
+                })
+            }
 
+            this.cart(req,res)
 
-
+        } catch (err) {
+            logger.error(err)
+        }
+        
+    }
 
     cart = async (req,res)=>{
         const userData = await userServices.getById(req.session.passport.user);

@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const loggerLoader = ( app ) => {
 
     app.use(loggerHttp);
-    app.use(morgan('dev'));
+    //app.use(morgan('dev'));
 
     return app;
 }

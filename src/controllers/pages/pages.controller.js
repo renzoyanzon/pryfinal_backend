@@ -8,6 +8,7 @@ const CartServices = require('../../services/cart/cart.services');
 const cartSertices = new CartServices();
 
 const createMessage = require('../../utils/pages/pages.utils');
+const AppError = require('../../middlewares/error.middleware')
 
 class PagesController {
     constructor(){}
@@ -58,9 +59,12 @@ class PagesController {
     cart = async(req,res)=>{
         try {
             const userId = req.session.passport.user;
-            const cart= await cartSertices.getLastCart(userId)
-        } catch (error) {
-            
+            const cart= await cartSertices.getLastCart(userId);
+            const user = await userServices.getById(userId);
+            const message = createMessage('cart',req, {user,cart})
+            res.render('cart',{message:message})
+        } catch (err) {
+            console.error(err)
         }
     }
 

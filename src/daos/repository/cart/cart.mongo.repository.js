@@ -21,6 +21,7 @@ class CartMongoRepository{
     async getAll(){
         try {
             const query = await CartModel.find({});
+           
             return query
             
         } catch (err) {
@@ -49,6 +50,32 @@ class CartMongoRepository{
             
         } catch (err) {
             throw new AppError(err.message, 'Mongo data process','Cart Repository', 'update() error', 500);
+        }
+    }
+
+    async updateProducts (cartId, productsToUpdate){
+        try {
+            const filter = {_id: cartId};
+            
+
+            const update = {
+                $set: {products: productsToUpdate}
+            }
+
+            const existCart = await CartModel.findOne(filter);
+            console.log(existCart)
+
+            const updatedCart = await CartModel.findOneAndUpdate(filter,update, {new:true});
+            
+            
+            if(!updatedCart){
+                return false
+            }
+            return this.updateProducts
+            
+        } catch (err) {
+            //throw new AppError(err.message, 'Mongo data process','Cart Repository', 'update() error', 500);
+            console.error(err)
         }
     }
 
@@ -104,6 +131,7 @@ class CartMongoRepository{
 
         }
     }
+
 }
 
 module.exports= CartMongoRepository

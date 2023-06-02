@@ -53,7 +53,7 @@ class CartServices {
     getById = async (cartId)=>{
         try {
             const data = await this.cartFactory.getByCondition('_id',cartId);
-            return data
+         
             
         } catch (err) {
             throw new AppError(err.message, 'Data process', 'Carts Services','getById error', 500 );
@@ -85,6 +85,30 @@ class CartServices {
         }
     }
 
+    deleteById = async (cartId)=>{
+        try {
+            const data = await this.cartFactory.deleteByCondition('_id',cartId);
+            return data
+            
+        } catch (err) {
+            throw new AppError(err.message, 'Data process', 'Carts Services','deleteById error', 500 );
+        }
+    }
+
+    deleteProductById = async (cartId, userId,productId)=>{
+        try {
+            let cartToUpdate = await this.cartFactory.getLastCart(userId);
+            const query = cartToUpdate.products.filter(el=> el._id.valueOf() !== productId);
+        
+            const data = await this.cartFactory.updateProducts(cartId, query);
+            return data
+
+        } catch (err) {
+            throw new AppError(err.message, 'Data process', 'Carts Services','deleteProductById', 500 );
+        }
+        
+    }
+        
 }
 
 module.exports= CartServices;

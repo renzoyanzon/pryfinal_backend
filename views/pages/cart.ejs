@@ -14,7 +14,10 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
     <h1 class="text-capitalize">Product Cart</h1>
     <% if (typeof message.main.cart == 'object') { %>
-      <p>Cart id: <%= message.main.cart._id %></p>
+      <form action= <%=`/api/cart/delete/${message.main.cart._id}` %> method="GET" class="w-50">
+        <th> <button class="fa fa-trash" aria-hidden="true"></button></th>
+      </form>
+      <p> Delete Cart</p>
     <%} else { %>
       <h3>Cart empty</h3>
     <% } %>
@@ -40,7 +43,11 @@
                 <td><%= item.name %></td>
                 <td><%= item.description %></td>
                 <td><%= item.price %></td>
-                <th> <button class="fa fa-trash" aria-hidden="true"></button></th>
+                <form action= <%=`/api/cart/${item._id}` %> method="GET" class="w-50">
+                  <input type="hidden" name="productId" value=<%=`${item._id} `%>>
+                  <input type="hidden" name="cartId" value=<%=`${message.main.cart._id} `%>>
+                  <th> <button class="fa fa-trash" aria-hidden="true"></button></th>
+                </form>
               </tr>
             <% }); %>
           
