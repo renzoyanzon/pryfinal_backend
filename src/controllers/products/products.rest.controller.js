@@ -3,9 +3,17 @@ const ProductServices = require('../../services/product/product.services');
 const httpStatus = require('http-status');
 const {logger} = require('../../utils/logger/index.logger');
 
+const productMockGenerator = require('../../utils/mock/products.mocks');
+
 class ProductsRestController {
     constructor(){
         this.productServices = new ProductServices();
+        
+        this.productServices.getAll().then((data)=>{
+            if(!data?.length){
+                productMockGenerator(10);
+            }
+        })
     }
 
     static getInstance (){
@@ -18,7 +26,6 @@ class ProductsRestController {
     getAll = async(_req, res) =>{
         try {
             const data = await this.productServices.getAll();
-            
             if (!data) {
                 return res.status(500).json({
                     success: false,

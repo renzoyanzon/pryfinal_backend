@@ -14,6 +14,7 @@
   "dependencies": {
     "@graphql-yoga/plugin-sofa": "^1.9.1",
     "argon2": "^0.30.3",
+    "axios": "^1.4.0",
     "compression": "^1.7.4",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",
@@ -37,10 +38,12 @@
     "pino-http": "^8.3.3",
     "pino-pretty": "^10.0.0",
     "session": "^0.1.0",
+    "supertest": "^6.3.3",
     "twilio": "^4.11.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "nodemon": "^2.0.22"
   }
 }

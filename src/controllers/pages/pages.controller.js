@@ -8,7 +8,8 @@ const CartServices = require('../../services/cart/cart.services');
 const cartSertices = new CartServices();
 
 const createMessage = require('../../utils/pages/pages.utils');
-const AppError = require('../../middlewares/error.middleware')
+const AppError = require('../../middlewares/error.middleware');
+
 
 class PagesController {
     constructor(){}
@@ -40,7 +41,7 @@ class PagesController {
     }
 
     products = async(req,res)=>{
-        const products = await productServices.getAll();
+        let products = await productServices.getAll();
         const message = createMessage('home',req, {products})
         res.render('products',{message:message});
     }

@@ -62,9 +62,6 @@ class CartMongoRepository{
                 $set: {products: productsToUpdate}
             }
 
-            const existCart = await CartModel.findOne(filter);
-            console.log(existCart)
-
             const updatedCart = await CartModel.findOneAndUpdate(filter,update, {new:true});
             
             
@@ -74,8 +71,7 @@ class CartMongoRepository{
             return this.updateProducts
             
         } catch (err) {
-            //throw new AppError(err.message, 'Mongo data process','Cart Repository', 'update() error', 500);
-            console.error(err)
+            throw new AppError(err.message, 'Mongo data process','Cart Repository', 'updateProducts() error', 500);
         }
     }
 

@@ -212,9 +212,6 @@ class CartController{
             const productId = req.query.productId;
             const cartId = req.query.cartId;
 
-            console.log(productId);
-            console.log(cartId)
-         
             const data = await this.cartServices.deleteProductById(cartId, userId,productId);
             if(!data){
                 return res.status(500).json({
